@@ -15,6 +15,9 @@
 		29C098E92C9B8F3A009FCE19 /* resapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29C098E72C9B8F3A009FCE19 /* resapp.xcdatamodeld */; };
 		29C098FE2C9BF963009FCE19 /* AddJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C098FC2C9BF963009FCE19 /* AddJobView.swift */; };
 		29C098FF2C9BF963009FCE19 /* JobDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C098FD2C9BF963009FCE19 /* JobDetailView.swift */; };
+		29C0990A2C9C0886009FCE19 /* PDFGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C099082C9C0886009FCE19 /* PDFGenerator.swift */; };
+		29C0990B2C9C0886009FCE19 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C099092C9C0886009FCE19 /* AppError.swift */; };
+		29C0990D2C9C08A6009FCE19 /* JobFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C0990C2C9C08A6009FCE19 /* JobFormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		29C098E82C9B8F3A009FCE19 /* resapp.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = resapp.xcdatamodel; sourceTree = "<group>"; };
 		29C098FC2C9BF963009FCE19 /* AddJobView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddJobView.swift; path = Views/AddJobView.swift; sourceTree = "<group>"; };
 		29C098FD2C9BF963009FCE19 /* JobDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JobDetailView.swift; path = Views/JobDetailView.swift; sourceTree = "<group>"; };
+		29C099082C9C0886009FCE19 /* PDFGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PDFGenerator.swift; path = Utilities/PDFGenerator.swift; sourceTree = "<group>"; };
+		29C099092C9C0886009FCE19 /* AppError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppError.swift; path = Utilities/AppError.swift; sourceTree = "<group>"; };
+		29C0990C2C9C08A6009FCE19 /* JobFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JobFormView.swift; path = Views/JobFormView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,9 @@
 			children = (
 				29C098DC2C9B8F37009FCE19 /* resappApp.swift */,
 				29C098DE2C9B8F37009FCE19 /* ContentView.swift */,
+				29C0990C2C9C08A6009FCE19 /* JobFormView.swift */,
+				29C099092C9C0886009FCE19 /* AppError.swift */,
+				29C099082C9C0886009FCE19 /* PDFGenerator.swift */,
 				29C098FC2C9BF963009FCE19 /* AddJobView.swift */,
 				29C098FD2C9BF963009FCE19 /* JobDetailView.swift */,
 				29C098E02C9B8F3A009FCE19 /* Assets.xcassets */,
@@ -153,9 +162,12 @@
 			files = (
 				29C098FE2C9BF963009FCE19 /* AddJobView.swift in Sources */,
 				29C098E62C9B8F3A009FCE19 /* Persistence.swift in Sources */,
+				29C0990B2C9C0886009FCE19 /* AppError.swift in Sources */,
 				29C098FF2C9BF963009FCE19 /* JobDetailView.swift in Sources */,
 				29C098DF2C9B8F37009FCE19 /* ContentView.swift in Sources */,
+				29C0990D2C9C08A6009FCE19 /* JobFormView.swift in Sources */,
 				29C098E92C9B8F3A009FCE19 /* resapp.xcdatamodeld in Sources */,
+				29C0990A2C9C0886009FCE19 /* PDFGenerator.swift in Sources */,
 				29C098DD2C9B8F37009FCE19 /* resappApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

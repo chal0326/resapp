@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import UniformTypeIdentifiers
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -21,7 +22,7 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 SearchBar(text: $searchText)
-                JobList(searchText: searchText)
+                JobList(searchText: searchText, showingErrorAlert: $showingErrorAlert, errorMessage: $errorMessage)
             }
             .navigationTitle("My Jobs")
             .toolbar {
@@ -51,7 +52,10 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showingImportExport) {
-                ImportExportView(action: importExportAction, errorMessage: $errorMessage, showingErrorAlert: $showingErrorAlert)
+                ImportExportView(errorMessage: $errorMessage, showingErrorAlert: $showingErrorAlert, action: importExportAction)
+            }
+            .alert(isPresented: $showingErrorAlert) {
+                Alert(title: Text("Error"), message: Text(errorMessage ?? "Unknown error"), dismissButton: .default(Text("OK")))
             }
         }
     }
@@ -91,45 +95,49 @@ struct SearchBar: View {
 }
 
 struct JobList: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \JobEntity.startDate, ascending: false)],
         animation: .default)
-    private var jobs: FetchedResults<JobEntity>
+    private var job: FetchedResults<JobEntity>
     
     var searchText: String
+    @Binding var showingErrorAlert: Bool
+    @Binding var errorMessage: String?
     
-    var filteredJobs: [JobEntity] {
+    var filteredJob: [JobEntity] {
         if searchText.isEmpty {
-            return Array(jobs)
+            return Array(job)
         } else {
-            return jobs.filter { job in
-                job.jobTitle.lowercased().contains(searchText.lowercased()) ||
-                job.company.lowercased().contains(searchText.lowercased()) ||
-                job.skillsArray.contains { $0.lowercased().contains(searchText.lowercased()) }
+            return job.filter { job in
+                job.jobTitle?.lowercased().contains(searchText.lowercased()) ?? false ||
+                (job.company?.lowercased().contains(searchText.lowercased()) ?? false) ||
+                job.skillsArray.contains { $0.name?.lowercased().contains(searchText.lowercased()) ?? false } ||
+                job.descriptionsArray.contains { $0.text?.lowercased().contains(searchText.lowercased()) ?? false }
             }
         }
     }
-
+    
     var body: some View {
         List {
-            ForEach(filteredJobs, id: \.self) { job in
+            ForEach(filteredJob, id: \.self) { job in
                 NavigationLink(destination: JobDetailView(job: job)) {
                     VStack(alignment: .leading) {
-                        Text(job.jobTitle)
+                        Text(job.jobTitle ?? "Unknown Title")
                             .font(.headline)
-                        Text(job.company)
+                        Text(job.company ?? "Unknown Company")
                             .font(.subheadline)
                     }
                 }
             }
-            .onDelete(perform: deleteJobs)
+            .onDelete(perform: deleteJob)
         }
     }
-
-    private func deleteJobs(offsets: IndexSet) {
+    
+    private func deleteJob(offsets: IndexSet) {
         withAnimation {
-            offsets.map { filteredJobs[$0] }.forEach(viewContext.delete)
-
+            offsets.map { filteredJob[$0] }.forEach(viewContext.delete)
+            
             do {
                 try viewContext.save()
             } catch {
@@ -191,9 +199,9 @@ struct ImportExportView: View {
                 defer { selectedFile.stopAccessingSecurityScopedResource() }
                 
                 let data = try Data(contentsOf: selectedFile)
-                let jobs = try JSONDecoder().decode([JobData].self, from: data)
+                let job = try JSONDecoder().decode([JobData].self, from: data)
                 
-                for jobData in jobs {
+                for jobData in job {
                     let job = JobEntity(context: viewContext)
                     job.jobTitle = jobData.jobTitle
                     job.company = jobData.company
@@ -224,7 +232,7 @@ struct ImportExportView: View {
             isPresented: $isExporting,
             document: document,
             contentType: .json,
-            defaultFilename: "jobs_export"
+            defaultFilename: "job_export"
         ) { result in
             if case .success = result {
                 presentationMode.wrappedValue.dismiss()
@@ -240,9 +248,9 @@ struct ImportExportView: View {
             defer { url.stopAccessingSecurityScopedResource() }
             
             let data = try Data(contentsOf: url)
-            let jobs = try JSONDecoder().decode([JobData].self, from: data)
+            let job = try JSONDecoder().decode([JobData].self, from: data)
             
-            for jobData in jobs {
+            for jobData in job {
                 let job = JobEntity(context: viewContext)
                 job.jobTitle = jobData.jobTitle
                 job.company = jobData.company
@@ -273,18 +281,18 @@ struct ImportExportView: View {
     private func exportData() {
         do {
             let fetchRequest: NSFetchRequest<JobEntity> = JobEntity.fetchRequest()
-            let jobs = try viewContext.fetch(fetchRequest)
-            let jobsData = jobs.map { job -> JobData in
+            let job = try viewContext.fetch(fetchRequest)
+            let jobData = job.map { job -> JobData in
                 JobData(
-                    jobTitle: job.jobTitle,
-                    company: job.company,
-                    startDate: job.startDate,
-                    endDate: job.endDate,
+                    jobTitle: job.jobTitle ?? <#default value#>,
+                    company: job.company!,
+                    startDate: job.startDate ?? <#default value#>,
+                    endDate: job.endDate!,
                     descriptions: job.descriptionsArray.map { $0.text ?? "" },
                     skills: job.skillsArray.map { $0.name ?? "" }
                 )
             }
-            let jsonData = try JSONEncoder().encode(jobsData)
+            let jsonData = try JSONEncoder().encode(jobData)
             document = MessageDocument(message: String(data: jsonData, encoding: .utf8) ?? "")
             isExporting = true
         } catch {
