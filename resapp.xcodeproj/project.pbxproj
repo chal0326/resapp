@@ -13,6 +13,8 @@
 		29C098E42C9B8F3A009FCE19 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C098E32C9B8F3A009FCE19 /* Preview Assets.xcassets */; };
 		29C098E62C9B8F3A009FCE19 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C098E52C9B8F3A009FCE19 /* Persistence.swift */; };
 		29C098E92C9B8F3A009FCE19 /* resapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29C098E72C9B8F3A009FCE19 /* resapp.xcdatamodeld */; };
+		29C098FE2C9BF963009FCE19 /* AddJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C098FC2C9BF963009FCE19 /* AddJobView.swift */; };
+		29C098FF2C9BF963009FCE19 /* JobDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C098FD2C9BF963009FCE19 /* JobDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,7 +24,9 @@
 		29C098E02C9B8F3A009FCE19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29C098E32C9B8F3A009FCE19 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		29C098E52C9B8F3A009FCE19 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		29C098E82C9B8F3A009FCE19 /* resapp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = resapp.xcdatamodel; sourceTree = "<group>"; };
+		29C098E82C9B8F3A009FCE19 /* resapp.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = resapp.xcdatamodel; sourceTree = "<group>"; };
+		29C098FC2C9BF963009FCE19 /* AddJobView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddJobView.swift; path = Views/AddJobView.swift; sourceTree = "<group>"; };
+		29C098FD2C9BF963009FCE19 /* JobDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JobDetailView.swift; path = Views/JobDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 			children = (
 				29C098DC2C9B8F37009FCE19 /* resappApp.swift */,
 				29C098DE2C9B8F37009FCE19 /* ContentView.swift */,
+				29C098FC2C9BF963009FCE19 /* AddJobView.swift */,
+				29C098FD2C9BF963009FCE19 /* JobDetailView.swift */,
 				29C098E02C9B8F3A009FCE19 /* Assets.xcassets */,
 				29C098E52C9B8F3A009FCE19 /* Persistence.swift */,
 				29C098E72C9B8F3A009FCE19 /* resapp.xcdatamodeld */,
@@ -117,6 +123,8 @@
 				Base,
 			);
 			mainGroup = 29C098D02C9B8F37009FCE19;
+			packageReferences = (
+			);
 			productRefGroup = 29C098DA2C9B8F37009FCE19 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -143,7 +151,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29C098FE2C9BF963009FCE19 /* AddJobView.swift in Sources */,
 				29C098E62C9B8F3A009FCE19 /* Persistence.swift in Sources */,
+				29C098FF2C9BF963009FCE19 /* JobDetailView.swift in Sources */,
 				29C098DF2C9B8F37009FCE19 /* ContentView.swift in Sources */,
 				29C098E92C9B8F3A009FCE19 /* resapp.xcdatamodeld in Sources */,
 				29C098DD2C9B8F37009FCE19 /* resappApp.swift in Sources */,

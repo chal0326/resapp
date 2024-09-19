@@ -13,15 +13,24 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        for i in 0..<5 {
+            let newJob = JobEntity(context: viewContext)
+            newJob.jobTitle = "Job \(i + 1)"
+            newJob.company = "Company \(i + 1)"
+            newJob.startDate = Date().addingTimeInterval(Double(-i) * 86400 * 30)
+            newJob.endDate = Date().addingTimeInterval(Double(-i + 1) * 86400 * 30)
+            
+            let description = DescriptionEntity(context: viewContext)
+            description.text = "Description for Job \(i + 1)"
+            newJob.addToDescriptions(description)
+            
+            let skill = SkillEntity(context: viewContext)
+            skill.name = "Skill \(i + 1)"
+            newJob.addToSkills(skill)
         }
         do {
             try viewContext.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
