@@ -3,32 +3,32 @@ import CoreData
 
 struct JobDetailView: View {
     @ObservedObject var job: JobEntity
-    @State private var showingEditView = false
-    @State private var showingShareSheet = false
-    @State private var pdfData: Data?
+    @State private var showingEditView: Bool = false
+    @State private var showingShareSheet: Bool = false
+    @State private var pdfData: Data? = nil
 
     var body: some View {
         List {
             Section(header: Text("Job Details")) {
-                Text("Title: \(job.jobTitle)")
-                Text("Company: \(job.company)")
-                Text("Start Date: \(job.startDate, formatter: dateFormatter)")
-                Text("End Date: \(job.endDate, formatter: dateFormatter)")
+                Text("Title: \(job.jobTitle ?? "Unknown Title")") // Safely unwrap jobTitle
+                Text("Company: \(job.company ?? "Unknown Company")") // Safely unwrap company
+                Text("Start Date: \(job.startDate != nil ? dateFormatter.string(from: job.startDate!) : "Unknown Date")") // Safely unwrap startDate
+                Text("End Date: \(job.endDate != nil ? dateFormatter.string(from: job.endDate!) : "Unknown Date")") // Safely unwrap endDate
             }
 
             Section(header: Text("Descriptions")) {
-                ForEach(job.descriptionsArray, id: \.self) { description in
-                    Text(description)
+                ForEach(job.descriptionsArray, id: \.text) { description in // Use descriptionsArray directly
+                    Text(description.text ?? "No Description") // Safely unwrap the optional
                 }
             }
 
             Section(header: Text("Skills")) {
-                ForEach(job.skillsArray, id: \.self) { skill in
-                    Text(skill)
+                ForEach(job.skillsArray, id: \.name) { skill in // Use skillsArray directly
+                    Text(skill.name ?? "No Skill") // Safely unwrap the optional
                 }
             }
         }
-        .navigationTitle(job.jobTitle)
+        .navigationTitle(job.jobTitle ?? "Job Details") // Safely unwrap jobTitle for navigation title
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Edit") {

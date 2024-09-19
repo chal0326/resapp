@@ -284,10 +284,10 @@ struct ImportExportView: View {
             let job = try viewContext.fetch(fetchRequest)
             let jobData = job.map { job -> JobData in
                 JobData(
-                    jobTitle: job.jobTitle ?? <#default value#>,
-                    company: job.company!,
-                    startDate: job.startDate ?? <#default value#>,
-                    endDate: job.endDate!,
+                    jobTitle: job.jobTitle ?? "Unknown Title",
+                    company: job.company ?? "Unknonwn Company",
+                    startDate: job.startDate ?? Date(),
+                    endDate: job.endDate ?? Date(),
                     descriptions: job.descriptionsArray.map { $0.text ?? "" },
                     skills: job.skillsArray.map { $0.name ?? "" }
                 )
