@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22G830" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="DescriptionEntity" representedClassName="DescriptionEntity" syncable="YES" codeGenerationType="class">
+    <entity name="DescriptEntity" representedClassName="DescriptEntity" syncable="YES" codeGenerationType="class">
         <attribute name="text" optional="YES" attributeType="String"/>
-        <relationship name="job" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JobEntity" inverseName="descriptions" inverseEntity="JobEntity"/>
+        <relationship name="job" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="JobEntity" inverseName="descript" inverseEntity="JobEntity"/>
     </entity>
     <entity name="JobEntity" representedClassName="JobEntity" syncable="YES" codeGenerationType="class">
         <attribute name="company" attributeType="String"/>
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="jobTitle" attributeType="String"/>
         <attribute name="startDate" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="descriptions" toMany="YES" minCount="1" maxCount="2" deletionRule="Cascade" destinationEntity="DescriptionEntity" inverseName="job" inverseEntity="DescriptionEntity"/>
-        <relationship name="skills" toMany="YES" minCount="1" maxCount="2" deletionRule="Cascade" destinationEntity="SkillEntity" inverseName="job" inverseEntity="SkillEntity"/>
+        <relationship name="descript" toMany="YES" minCount="1" maxCount="2" deletionRule="Cascade" destinationEntity="DescriptEntity" inverseName="job" inverseEntity="DescriptEntity"/>
+        <relationship name="skill" toMany="YES" minCount="1" maxCount="2" deletionRule="Cascade" destinationEntity="SkillEntity" inverseName="job" inverseEntity="SkillEntity"/>
     </entity>
     <entity name="SkillEntity" representedClassName="SkillEntity" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String"/>
-        <relationship name="job" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JobEntity" inverseName="skills" inverseEntity="JobEntity"/>
+        <relationship name="job" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="JobEntity" inverseName="skill" inverseEntity="JobEntity"/>
     </entity>
 </model>

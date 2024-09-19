@@ -10,7 +10,7 @@ struct AddJobView: View {
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
 
-    @State private var descriptions: [String] = [""]
+    @State private var descript: [String] = [""]
     @State private var skills: [String] = [""]
 
     @State private var showingAlert = false
@@ -27,13 +27,13 @@ struct AddJobView: View {
                 DatePicker("End Date", selection: $endDate, displayedComponents: .date)
             }
 
-            Section(header: Text("Descriptions")) {
-                ForEach(descriptions.indices, id: \.self) { index in
+            Section(header: Text("Descript")) {
+                ForEach(descript.indices, id: \.self) { index in
                     HStack {
-                        TextField("Description", text: $descriptions[index])
-                        if descriptions.count > 1 {
+                        TextField("Descript", text: $descript[index])
+                        if descript.count > 1 {
                             Button(action: {
-                                descriptions.remove(at: index)
+                                descript.remove(at: index)
                             }) {
                                 Image(systemName: "minus.circle.fill")
                                     .foregroundColor(.red)
@@ -42,9 +42,9 @@ struct AddJobView: View {
                     }
                 }
                 Button(action: {
-                    descriptions.append("")
+                    descript.append("")
                 }) {
-                    Label("Add Description", systemImage: "plus")
+                    Label("Add Descript", systemImage: "plus")
                 }
             }
 
@@ -94,10 +94,10 @@ struct AddJobView: View {
             newJob.startDate = startDate
             newJob.endDate = endDate
 
-            for desc in descriptions where !desc.isEmpty {
-                let description = DescriptionEntity(context: viewContext)
-                description.text = desc
-                newJob.addToDescriptions(description)
+            for desc in descript where !desc.isEmpty {
+                let descript = DescriptEntity(context: viewContext)
+                descript.text = desc
+                newJob.addToDescript(descript)
             }
 
             for skl in skills where !skl.isEmpty {

@@ -20,7 +20,7 @@ class PDFGenerator {
             context.beginPage()
             let titleBottom = addTitle(pageRect: pageRect)
             let contentTop = addJobDetails(job: job, pageRect: pageRect, y: titleBottom + 20)
-            addDescriptions(job: job, pageRect: pageRect, y: contentTop + 20)
+            addDescript(job: job, pageRect: pageRect, y: contentTop + 20)
             addSkills(job: job, pageRect: pageRect, y: pageHeight - 100)
         }
 
@@ -69,21 +69,21 @@ class PDFGenerator {
         return currentY
     }
 
-    private static func addDescriptions(job: JobEntity, pageRect: CGRect, y: CGFloat) -> CGFloat {
+    private static func addDescript(job: JobEntity, pageRect: CGRect, y: CGFloat) -> CGFloat {
         let textFont = UIFont.systemFont(ofSize: 12.0, weight: .regular)
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: textFont
         ]
         
-        let attributedHeader = NSAttributedString(string: "Descriptions:", attributes: [.font: UIFont.systemFont(ofSize: 14.0, weight: .bold)])
+        let attributedHeader = NSAttributedString(string: "Descript:", attributes: [.font: UIFont.systemFont(ofSize: 14.0, weight: .bold)])
         let headerRect = CGRect(x: 72, y: y, width: pageRect.width - 144, height: 20)
         attributedHeader.draw(in: headerRect)
         
         var currentY = y + 25
-        for description in job.descriptionsArray {
-            let attributedDescription = NSAttributedString(string: "• \(description.text ?? "")", attributes: textAttributes)
-            let descriptionRect = CGRect(x: 72, y: currentY, width: pageRect.width - 144, height: 15)
-            attributedDescription.draw(in: descriptionRect)
+        for descript in job.descriptArray {
+            let attributedDescript = NSAttributedString(string: "• \(descript.text ?? "")", attributes: textAttributes)
+            let descriptRect = CGRect(x: 72, y: currentY, width: pageRect.width - 144, height: 15)
+            attributedDescript.draw(in: descriptRect)
             currentY += 20
         }
         

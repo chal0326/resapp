@@ -6,7 +6,7 @@ enum AppError: Error, LocalizedError {
     case saveFailed(String)
     case deleteFailed(String)
 
-    var errorDescription: String? {
+    var errorDescript: String? {
         switch self {
         case .importFailed(let reason):
             return "Import failed: \(reason)"

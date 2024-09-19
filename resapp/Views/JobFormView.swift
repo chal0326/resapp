@@ -9,8 +9,8 @@ struct JobFormView: View {
     @State private var company: String = ""
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
-    @State private var descriptions: [String] = [""]
-    @State private var skills: [String] = [""]
+    @State private var descript: [String] = [""]
+    @State private var skill: [String] = [""]
     @State private var showingAlert = false
     @State private var alertMessage = ""
 
@@ -22,8 +22,8 @@ struct JobFormView: View {
         _company = State(initialValue: job?.company ?? "")
         _startDate = State(initialValue: job?.startDate ?? Date())
         _endDate = State(initialValue: job?.endDate ?? Date())
-        _descriptions = State(initialValue: job?.descriptionsArray ?? [""])
-        _skills = State(initialValue: job?.skillsArray ?? [""])
+        _descript = State(initialValue: job?.descriptArray ?? [""])
+        _skill = State(initialValue: job?.skillArray ?? [""])
     }
 
     var body: some View {
@@ -55,21 +55,21 @@ struct JobFormView: View {
             jobToSave.startDate = startDate
             jobToSave.endDate = endDate
 
-            // Remove existing descriptions and skills
-            jobToSave.descriptions?.forEach { viewContext.delete($0 as! NSManagedObject) }
-            jobToSave.skills?.forEach { viewContext.delete($0 as! NSManagedObject) }
+            // Remove existing descript and skill
+            jobToSave.descript?.forEach { viewContext.delete($0 as! NSManagedObject) }
+            jobToSave.skill?.forEach { viewContext.delete($0 as! NSManagedObject) }
 
-            // Add new descriptions and skills
-            for desc in descriptions where !desc.isEmpty {
-                let description = DescriptionEntity(context: viewContext)
-                description.text = desc
-                jobToSave.addToDescriptions(description)
+            // Add new descript and skill
+            for desc in descript where !desc.isEmpty {
+                let descript = descriptEntity(context: viewContext)
+                descript.text = desc
+                jobToSave.addToDescript(descript)
             }
 
-            for skl in skills where !skl.isEmpty {
+            for skl in skill where !skl.isEmpty {
                 let skill = SkillEntity(context: viewContext)
                 skill.name = skl
-                jobToSave.addToSkills(skill)
+                jobToSave.addToSkill(skill)
             }
 
             do {
@@ -95,14 +95,14 @@ struct JobFormView: View {
             return false
         }
         
-        // Check if at least one description is provided
-        guard descriptions.contains(where: { !$0.isEmpty }) else {
-            showAlert(message: "Please add at least one job description.")
+        // Check if at least one descript is provided
+        guard descript.contains(where: { !$0.isEmpty }) else {
+            showAlert(message: "Please add at least one job descript.")
             return false
         }
         
         // Check if at least one skill is provided
-        guard skills.contains(where: { !$0.isEmpty }) else {
+        guard skill.contains(where: { !$0.isEmpty }) else {
             showAlert(message: "Please add at least one skill.")
             return false
         }

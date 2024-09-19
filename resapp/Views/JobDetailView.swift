@@ -16,9 +16,9 @@ struct JobDetailView: View {
                 Text("End Date: \(job.endDate != nil ? dateFormatter.string(from: job.endDate!) : "Unknown Date")") // Safely unwrap endDate
             }
 
-            Section(header: Text("Descriptions")) {
-                ForEach(job.descriptionsArray, id: \.text) { description in // Use descriptionsArray directly
-                    Text(description.text ?? "No Description") // Safely unwrap the optional
+            Section(header: Text("Descript")) {
+                ForEach(job.descriptArray, id: \.text) { descript in // Use descriptArray directly
+                    Text(descript.text ?? "No Descript") // Safely unwrap the optional
                 }
             }
 
@@ -68,8 +68,8 @@ struct JobDetailView: View {
 
 // Extend JobEntity to provide sorted arrays
 extension JobEntity {
-    var descriptionsArray: [DescriptionEntity] {
-        let set = descriptions as? Set<DescriptionEntity> ?? []
+    var descriptArray: [DescriptEntity] {
+        let set = descript as? Set<DescriptEntity> ?? []
         return set.sorted {
             $0.text ?? "" < $1.text ?? ""
         }

@@ -112,8 +112,8 @@ struct JobList: View {
             return job.filter { job in
                 job.jobTitle?.lowercased().contains(searchText.lowercased()) ?? false ||
                 (job.company?.lowercased().contains(searchText.lowercased()) ?? false) ||
-                job.skillsArray.contains { $0.name?.lowercased().contains(searchText.lowercased()) ?? false } ||
-                job.descriptionsArray.contains { $0.text?.lowercased().contains(searchText.lowercased()) ?? false }
+                job.skillArray.contains { $0.name?.lowercased().contains(searchText.lowercased()) ?? false } ||
+                job.descriptArray.contains { $0.text?.lowercased().contains(searchText.lowercased()) ?? false }
             }
         }
     }
@@ -141,7 +141,7 @@ struct JobList: View {
             do {
                 try viewContext.save()
             } catch {
-                errorMessage = AppError.deleteFailed(error.localizedDescription).localizedDescription
+                errorMessage = AppError.deleteFailed(error.localizedDescript).localizedDescript
                 showingErrorAlert = true
             }
         }
@@ -208,10 +208,10 @@ struct ImportExportView: View {
                     job.startDate = jobData.startDate
                     job.endDate = jobData.endDate
                     
-                    for descriptionText in jobData.descriptions {
-                        let description = DescriptionEntity(context: viewContext)
-                        description.text = descriptionText
-                        job.addToDescriptions(description)
+                    for descriptText in jobData.descript {
+                        let descript = DescriptEntity(context: viewContext)
+                        descript.text = descriptText
+                        job.addToDescript(descript)
                     }
                     
                     for skillName in jobData.skills {
@@ -224,7 +224,7 @@ struct ImportExportView: View {
                 try viewContext.save()
                 presentationMode.wrappedValue.dismiss()
             } catch {
-                errorMessage = AppError.importFailed(error.localizedDescription).localizedDescription
+                errorMessage = AppError.importFailed(error.localizedDescript).localizedDescript
                 showingErrorAlert = true
             }
         }
@@ -257,10 +257,10 @@ struct ImportExportView: View {
                 job.startDate = jobData.startDate
                 job.endDate = jobData.endDate
                 
-                for descriptionText in jobData.descriptions {
-                    let description = DescriptionEntity(context: viewContext)
-                    description.text = descriptionText
-                    job.addToDescriptions(description)
+                for descriptText in jobData.descript {
+                    let descript = DescriptEntity(context: viewContext)
+                    descript.text = descriptText
+                    job.addToDescript(descript)
                 }
                 
                 for skillName in jobData.skills {
@@ -273,7 +273,7 @@ struct ImportExportView: View {
             try viewContext.save()
             presentationMode.wrappedValue.dismiss()
         } catch {
-            errorMessage = AppError.importFailed(error.localizedDescription).localizedDescription
+            errorMessage = AppError.importFailed(error.localizedDescript).localizedDescript
             showingErrorAlert = true
         }
     }
@@ -288,7 +288,7 @@ struct ImportExportView: View {
                     company: job.company ?? "Unknonwn Company",
                     startDate: job.startDate ?? Date(),
                     endDate: job.endDate ?? Date(),
-                    descriptions: job.descriptionsArray.map { $0.text ?? "" },
+                    descript: job.descriptArray.map { $0.text ?? "" },
                     skills: job.skillsArray.map { $0.name ?? "" }
                 )
             }
@@ -296,7 +296,7 @@ struct ImportExportView: View {
             document = MessageDocument(message: String(data: jsonData, encoding: .utf8) ?? "")
             isExporting = true
         } catch {
-            errorMessage = AppError.exportFailed(error.localizedDescription).localizedDescription
+            errorMessage = AppError.exportFailed(error.localizedDescript).localizedDescript
             showingErrorAlert = true
         }
     }
@@ -307,7 +307,7 @@ struct JobData: Codable {
     let company: String
     let startDate: Date
     let endDate: Date
-    let descriptions: [String]
+    let descript: [String]
     let skills: [String]
 }
 

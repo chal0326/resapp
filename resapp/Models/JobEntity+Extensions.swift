@@ -2,8 +2,8 @@ import Foundation
 import CoreData
 
 extension JobEntity: Identifiable {
-    var descriptionsArray: [DescriptionEntity] {
-        let set = descriptions as? Set<DescriptionEntity> ?? []
+    var descriptArray: [DescriptEntity] {
+        let set = descript as? Set<DescriptEntity> ?? []
         return set.sorted {
             $0.text ?? "" < $1.text ?? ""
         }
@@ -25,7 +25,7 @@ extension JobEntity: Identifiable {
             return false
         }
         
-        guard let descriptions = descriptions, !descriptions.isEmpty else {
+        guard let descript = descript, !descript.isEmpty else {
             return false
         }
         

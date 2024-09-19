@@ -20,9 +20,9 @@ struct PersistenceController {
             newJob.startDate = Date().addingTimeInterval(Double(-i) * 86400 * 30)
             newJob.endDate = Date().addingTimeInterval(Double(-i + 1) * 86400 * 30)
             
-            let description = DescriptionEntity(context: viewContext)
-            description.text = "Description for Job \(i + 1)"
-            newJob.addToDescriptions(description)
+            let descript = DescriptEntity(context: viewContext)
+            descript.text = "Descript for Job \(i + 1)"
+            newJob.addToDescript(descript)
             
             let skill = SkillEntity(context: viewContext)
             skill.name = "Skill \(i + 1)"
@@ -42,9 +42,9 @@ struct PersistenceController {
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "resapp")
         if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+            container.persistentStoreDescript.first!.url = URL(fileURLWithPath: "/dev/null")
         }
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (storeDescript, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
