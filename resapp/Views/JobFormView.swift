@@ -9,9 +9,9 @@ struct JobFormView: View {
     @State private var company: String = ""
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
-    @State private var descript: [String] = [""]
-    @State private var skill: [String] = [""]
-    @State private var showingAlert = false
+    @State private var descriptions: [String] = [""]
+    @State private var skills: [String] = [""]
+    @State private var showAlert = false
     @State private var alertMessage = ""
 
     var job: JobEntity?
@@ -24,8 +24,10 @@ struct JobFormView: View {
         _endDate = State(initialValue: job?.endDate ?? Date())
         
         // Ensure proper type annotations for descriptions and skill
-        _descript = State(initialValue: job?.descriptArray.map { $0.text ?? "" } ?? [""]) // Assuming descriptionsArray is an array of DescriptionEntity
-        _skill = State(initialValue: job?.skillArray.map { $0.name ?? "" } ?? [""]) // Assuming skillArray is an array of SkillEntity
+        
+        // Ensure proper type annotations for descriptions and skill
+        _descriptions = State(initialValue: job?.descriptArray.map { $0.text ?? "" }.map { $0.text ?? "" } ?? [""]) // Assuming descriptionsArray is an array of DescriptionEntity // Assuming descriptionsArray is an array of DescriptionEntity
+        _skills = State(initialValue: job?.skillArray.map { $0.name ?? "" }.map { $0.name ?? "" } ?? [""]) // Assuming skillArray is an array of SkillEntity // Assuming skillArray is an array of SkillEntity
     }
 
     var body: some View {
@@ -35,16 +37,24 @@ struct JobFormView: View {
         .navigationTitle(job == nil ? "Add Job" : "Edit Job")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(job == nil ? "Save" : "Update") {
-                    if isValidInput() {
-                        saveJob()
+                Button(action: {
+                    if job == nil {
+                        // Save action
+                        if isValidInput() {
+                            saveJob()
+                        }
                     } else {
-                        showAlert(message: "Please fill in all required fields and ensure the start date is before the end date.")
+                        // Update action
+                        if isValidInput() {
+                            saveJob()
+                        }
                     }
+                }) {
+                    Text(job == nil ? "Save" : "Update") // Set button title based on job state
                 }
             }
         }
-        .alert(isPresented: $showingAlert) {
+        .alert(isPresented: $showAlert) {
             Alert(title: Text("Invalid Input"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
     }
@@ -62,16 +72,16 @@ struct JobFormView: View {
             jobToSave.skill?.forEach { viewContext.delete($0 as! NSManagedObject) }
 
             // Add new descript and skill
-            for desc in descript where !desc.isEmpty {
-                let descript = descriptEntity(context: viewContext)
-                descript.text = desc
-                jobToSave.addToDescript(descript)
+            for desc in descriptions where !desc.isEmpty {
+                let descriptions = DescriptEntity(context: viewContext)
+                descriptions.text = desc
+                jobToSave.addToDescript(descriptions)
             }
 
-            for skl in skill where !skl.isEmpty {
-                let skill = SkillEntity(context: viewContext)
-                skill.name = skl
-                jobToSave.addToSkill(skill)
+            for skl in skills where !skl.isEmpty {
+                let skills = SkillEntity(context: viewContext)
+                skills.name = skl
+                jobToSave.addToSkill(skills)
             }
 
             do {
@@ -87,25 +97,29 @@ struct JobFormView: View {
     private func isValidInput() -> Bool {
         // Check if job title and company are not empty and have a minimum length
         guard jobTitle.count >= 3, company.count >= 2 else {
-            showAlert(message: "Job title must be at least 3 characters and company name at least 2 characters long.")
+            alertMessage = "Job title must be at least 3 characters and company name at least 2 characters long." // Set the alert message
+            showAlert = true // Set showAlert to true to trigger the alert
             return false
         }
-        
+
         // Check if start date is before end date
         guard startDate <= endDate else {
-            showAlert(message: "Start date must be before or equal to the end date.")
+            alertMessage = "Start date must be before or equal to the end date." // Set the alert message
+            showAlert = true // Set showAlert to true to trigger the alert
             return false
         }
         
-        // Check if at least one descript is provided
-        guard descript.contains(where: { !$0.isEmpty }) else {
-            showAlert(message: "Please add at least one job descript.")
+        // Check if at least one description is provided
+        guard descriptions.contains(where: { !$0.isEmpty }) else {
+            alertMessage = "Please add at least one job description." // Set the alert message
+            showAlert = true // Set showAlert to true to trigger the alert
             return false
         }
         
         // Check if at least one skill is provided
-        guard skill.contains(where: { !$0.isEmpty }) else {
-            showAlert(message: "Please add at least one skill.")
+        guard skills.contains(where: { !$0.isEmpty }) else {
+            alertMessage = "Please add at least one skill." // Set the alert message
+            showAlert = true // Set showAlert to true to trigger the alert
             return false
         }
         

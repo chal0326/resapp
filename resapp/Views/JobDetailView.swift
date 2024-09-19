@@ -12,7 +12,7 @@ struct JobDetailView: View {
             Section(header: Text("Job Details")) {
                 Text("Title: \(job.jobTitle ?? "Unknown Title")") // Safely unwrap jobTitle
                 Text("Company: \(job.company ?? "Unknown Company")") // Safely unwrap company
-                Text("Start Date: \(job.startDate != nil ? dateFormatter.string(from: job.startDate!) : "Unknown Date")") // Safely unwrap startDate
+                Text("Start Date: \(job.startDate.map { dateFormatter.string(from: $0) } ?? "Unknown Date")") // Safer approach
                 Text("End Date: \(job.endDate != nil ? dateFormatter.string(from: job.endDate!) : "Unknown Date")") // Safely unwrap endDate
             }
 

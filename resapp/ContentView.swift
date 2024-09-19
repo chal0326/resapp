@@ -141,7 +141,7 @@ struct JobList: View {
             do {
                 try viewContext.save()
             } catch {
-                errorMessage = AppError.deleteFailed(error.localizedDescript).localizedDescript
+                errorMessage = AppError.deleteFailed(error.localizedDescription).localizedDescription
                 showingErrorAlert = true
             }
         }
@@ -224,7 +224,7 @@ struct ImportExportView: View {
                 try viewContext.save()
                 presentationMode.wrappedValue.dismiss()
             } catch {
-                errorMessage = AppError.importFailed(error.localizedDescript).localizedDescript
+                errorMessage = AppError.importFailed(error.localizedDescription).localizedDescription
                 showingErrorAlert = true
             }
         }
@@ -273,7 +273,7 @@ struct ImportExportView: View {
             try viewContext.save()
             presentationMode.wrappedValue.dismiss()
         } catch {
-            errorMessage = AppError.importFailed(error.localizedDescript).localizedDescript
+            errorMessage = AppError.importFailed(error.localizedDescription).localizedDescription
             showingErrorAlert = true
         }
     }
@@ -296,7 +296,7 @@ struct ImportExportView: View {
             document = MessageDocument(message: String(data: jsonData, encoding: .utf8) ?? "")
             isExporting = true
         } catch {
-            errorMessage = AppError.exportFailed(error.localizedDescript).localizedDescript
+            errorMessage = AppError.exportFailed(error.localizedDescription).localizedDescription
             showingErrorAlert = true
         }
     }

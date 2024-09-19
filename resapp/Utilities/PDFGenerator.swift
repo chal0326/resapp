@@ -52,10 +52,10 @@ class PDFGenerator {
         dateFormatter.dateStyle = .medium
         
         let details = [
-            "Job Title: \(job.jobTitle)",
-            "Company: \(job.company)",
-            "Start Date: \(dateFormatter.string(from: job.startDate))",
-            "End Date: \(dateFormatter.string(from: job.endDate))"
+            "Job Title: \(job.jobTitle ?? "Unknown Title")", // Provide a default value
+            "Company: \(job.company ?? "Unknown Company")", // Provide a default value
+            "Start Date: \(dateFormatter.string(from: job.startDate ?? Date()))", // Provide a default value
+            "End Date: \(dateFormatter.string(from: job.endDate ?? Date()))" // Provide a default value
         ]
         
         var currentY = y
