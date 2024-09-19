@@ -26,7 +26,7 @@ struct PersistenceController {
             
             let skill = SkillEntity(context: viewContext)
             skill.name = "Skill \(i + 1)"
-            newJob.addToSkills(skill)
+            newJob.addToSkill(skill)
         }
         do {
             try viewContext.save()

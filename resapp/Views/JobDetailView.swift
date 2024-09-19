@@ -22,8 +22,8 @@ struct JobDetailView: View {
                 }
             }
 
-            Section(header: Text("Skills")) {
-                ForEach(job.skillsArray, id: \.name) { skill in // Use skillsArray directly
+            Section(header: Text("Skill")) {
+                ForEach(job.skillArray, id: \.name) { skill in // Use skillArray directly
                     Text(skill.name ?? "No Skill") // Safely unwrap the optional
                 }
             }
@@ -75,8 +75,8 @@ extension JobEntity {
         }
     }
 
-    var skillsArray: [SkillEntity] {
-        let set = skills as? Set<SkillEntity> ?? []
+    var skillArray: [SkillEntity] {
+        let set = skill as? Set<SkillEntity> ?? []
         return set.sorted {
             $0.name ?? "" < $1.name ?? ""
         }

@@ -11,7 +11,7 @@ struct AddJobView: View {
     @State private var endDate: Date = Date()
 
     @State private var descript: [String] = [""]
-    @State private var skills: [String] = [""]
+    @State private var skill: [String] = [""]
 
     @State private var showingAlert = false
     @State private var alertMessage = ""
@@ -48,13 +48,13 @@ struct AddJobView: View {
                 }
             }
 
-            Section(header: Text("Skills")) {
-                ForEach(skills.indices, id: \.self) { index in
+            Section(header: Text("Skill")) {
+                ForEach(skill.indices, id: \.self) { index in
                     HStack {
-                        TextField("Skill", text: $skills[index])
-                        if skills.count > 1 {
+                        TextField("Skill", text: $skill[index])
+                        if skill.count > 1 {
                             Button(action: {
-                                skills.remove(at: index)
+                                skill.remove(at: index)
                             }) {
                                 Image(systemName: "minus.circle.fill")
                                     .foregroundColor(.red)
@@ -63,7 +63,7 @@ struct AddJobView: View {
                     }
                 }
                 Button(action: {
-                    skills.append("")
+                    skill.append("")
                 }) {
                     Label("Add Skill", systemImage: "plus")
                 }
@@ -100,10 +100,10 @@ struct AddJobView: View {
                 newJob.addToDescript(descript)
             }
 
-            for skl in skills where !skl.isEmpty {
+            for skl in skill where !skl.isEmpty {
                 let skill = SkillEntity(context: viewContext)
                 skill.name = skl
-                newJob.addToSkills(skill)
+                newJob.addToSkill(skill)
             }
 
             do {

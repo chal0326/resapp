@@ -21,7 +21,7 @@ class PDFGenerator {
             let titleBottom = addTitle(pageRect: pageRect)
             let contentTop = addJobDetails(job: job, pageRect: pageRect, y: titleBottom + 20)
             addDescript(job: job, pageRect: pageRect, y: contentTop + 20)
-            addSkills(job: job, pageRect: pageRect, y: pageHeight - 100)
+            addSkill(job: job, pageRect: pageRect, y: pageHeight - 100)
         }
 
         return data
@@ -90,19 +90,19 @@ class PDFGenerator {
         return currentY
     }
 
-    private static func addSkills(job: JobEntity, pageRect: CGRect, y: CGFloat) {
+    private static func addSkill(job: JobEntity, pageRect: CGRect, y: CGFloat) {
         let textFont = UIFont.systemFont(ofSize: 12.0, weight: .regular)
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: textFont
         ]
         
-        let attributedHeader = NSAttributedString(string: "Skills:", attributes: [.font: UIFont.systemFont(ofSize: 14.0, weight: .bold)])
+        let attributedHeader = NSAttributedString(string: "Skill:", attributes: [.font: UIFont.systemFont(ofSize: 14.0, weight: .bold)])
         let headerRect = CGRect(x: 72, y: y, width: pageRect.width - 144, height: 20)
         attributedHeader.draw(in: headerRect)
         
-        let skills = job.skillsArray.map { $0.name ?? "" }.joined(separator: ", ")
-        let attributedSkills = NSAttributedString(string: skills, attributes: textAttributes)
-        let skillsRect = CGRect(x: 72, y: y + 25, width: pageRect.width - 144, height: 50)
-        attributedSkills.draw(in: skillsRect)
+        let skill = job.skillArray.map { $0.name ?? "" }.joined(separator: ", ")
+        let attributedSkill = NSAttributedString(string: skill, attributes: textAttributes)
+        let skillRect = CGRect(x: 72, y: y + 25, width: pageRect.width - 144, height: 50)
+        attributedSkill.draw(in: skillRect)
     }
 }

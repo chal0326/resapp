@@ -9,8 +9,8 @@ extension JobEntity: Identifiable {
         }
     }
 
-    var skillsArray: [SkillEntity] {
-        let set = skills as? Set<SkillEntity> ?? []
+    var skillArray: [SkillEntity] {
+        let set = skill as? Set<SkillEntity> ?? []
         return set.sorted {
             $0.name ?? "" < $1.name ?? ""
         }
@@ -29,7 +29,7 @@ extension JobEntity: Identifiable {
             return false
         }
         
-        guard let skills = skills, !skills.isEmpty else {
+        guard let skill = skill, !skill.isEmpty else {
             return false
         }
         

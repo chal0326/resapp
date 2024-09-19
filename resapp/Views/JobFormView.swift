@@ -22,8 +22,10 @@ struct JobFormView: View {
         _company = State(initialValue: job?.company ?? "")
         _startDate = State(initialValue: job?.startDate ?? Date())
         _endDate = State(initialValue: job?.endDate ?? Date())
-        _descript = State(initialValue: job?.descriptArray ?? [""])
-        _skill = State(initialValue: job?.skillArray ?? [""])
+        
+        // Ensure proper type annotations for descriptions and skill
+        _descript = State(initialValue: job?.descriptArray.map { $0.text ?? "" } ?? [""]) // Assuming descriptionsArray is an array of DescriptionEntity
+        _skill = State(initialValue: job?.skillArray.map { $0.name ?? "" } ?? [""]) // Assuming skillArray is an array of SkillEntity
     }
 
     var body: some View {

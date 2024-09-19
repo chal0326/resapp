@@ -214,10 +214,10 @@ struct ImportExportView: View {
                         job.addToDescript(descript)
                     }
                     
-                    for skillName in jobData.skills {
+                    for skillName in jobData.skill{
                         let skill = SkillEntity(context: viewContext)
                         skill.name = skillName
-                        job.addToSkills(skill)
+                        job.addToSkill(skill)
                     }
                 }
                 
@@ -263,10 +263,10 @@ struct ImportExportView: View {
                     job.addToDescript(descript)
                 }
                 
-                for skillName in jobData.skills {
+                for skillName in jobData.skill {
                     let skill = SkillEntity(context: viewContext)
                     skill.name = skillName
-                    job.addToSkills(skill)
+                    job.addToSkill(skill)
                 }
             }
             
@@ -289,7 +289,7 @@ struct ImportExportView: View {
                     startDate: job.startDate ?? Date(),
                     endDate: job.endDate ?? Date(),
                     descript: job.descriptArray.map { $0.text ?? "" },
-                    skills: job.skillsArray.map { $0.name ?? "" }
+                    skill: job.skillArray.map { $0.name ?? "" }
                 )
             }
             let jsonData = try JSONEncoder().encode(jobData)
@@ -308,7 +308,7 @@ struct JobData: Codable {
     let startDate: Date
     let endDate: Date
     let descript: [String]
-    let skills: [String]
+    let skill: [String]
 }
 
 struct MessageDocument: FileDocument {
