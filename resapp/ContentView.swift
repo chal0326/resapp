@@ -9,54 +9,26 @@ import SwiftUI
 import CoreData
 import UniformTypeIdentifiers
 
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State private var searchText = ""
-    @State private var showingAddJob = false
+    @State private var showingAddJob = true
     @State private var showingImportExport = false
-    @State private var importExportAction: ImportExportAction = .export
+    @State private var importExportAction: ImportExportAction = .import
     @State private var errorMessage: String?
     @State private var showingErrorAlert = false
 
     var body: some View {
-        NavigationView {
-            VStack {
-                SearchBar(text: $searchText)
-                JobList(searchText: searchText, showingErrorAlert: $showingErrorAlert, errorMessage: $errorMessage)
-            }
-            .navigationTitle("My Jobs")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showingAddJob = true }) {
-                        Label("Add Job", systemImage: "plus")
-                    }
+        TabView {
+            JobListView()
+                .tabItem {
+                    Label("Jobs", systemImage: "list.bullet")
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Menu {
-                        Button("Import") {
-                            importExportAction = .import
-                            showingImportExport = true
-                        }
-                        Button("Export") {
-                            importExportAction = .export
-                            showingImportExport = true
-                        }
-                    } label: {
-                        Label("More", systemImage: "ellipsis.circle")
-                    }
+            AddJobView()
+                .tabItem {
+                    Label("Add Job", systemImage: "plus")
                 }
-            }
-            .sheet(isPresented: $showingAddJob) {
-                NavigationView {
-                    JobFormView()
-                }
-            }
-            .sheet(isPresented: $showingImportExport) {
-                ImportExportView(errorMessage: $errorMessage, showingErrorAlert: $showingErrorAlert, action: importExportAction)
-            }
-            .alert(isPresented: $showingErrorAlert) {
-                Alert(title: Text("Error"), message: Text(errorMessage ?? "Unknown error"), dismissButton: .default(Text("OK")))
-            }
         }
     }
 }

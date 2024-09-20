@@ -66,12 +66,12 @@
 			isa = PBXGroup;
 			children = (
 				29C098DC2C9B8F37009FCE19 /* resappApp.swift */,
+				29C098FD2C9BF963009FCE19 /* JobDetailView.swift */,
 				29C098DE2C9B8F37009FCE19 /* ContentView.swift */,
 				29C0990C2C9C08A6009FCE19 /* JobFormView.swift */,
 				29C099092C9C0886009FCE19 /* AppError.swift */,
 				29C099082C9C0886009FCE19 /* PDFGenerator.swift */,
 				29C098FC2C9BF963009FCE19 /* AddJobView.swift */,
-				29C098FD2C9BF963009FCE19 /* JobDetailView.swift */,
 				29C098E02C9B8F3A009FCE19 /* Assets.xcassets */,
 				29C098E52C9B8F3A009FCE19 /* Persistence.swift */,
 				29C098E72C9B8F3A009FCE19 /* resapp.xcdatamodeld */,
