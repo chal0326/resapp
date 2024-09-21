@@ -9,7 +9,7 @@ extension JobEntity: Identifiable {
         }
     }
 
-    var skillArray: [SkillEntity] {
+    var skillsArray: [SkillEntity] {
         let set = skill as? Set<SkillEntity> ?? []
         return set.sorted {
             $0.name ?? "" < $1.name ?? ""
