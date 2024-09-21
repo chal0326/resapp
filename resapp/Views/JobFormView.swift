@@ -121,6 +121,4 @@ struct JobFormView: View {
         
         return true
     }
-
-    // ... (keep the existing showAlert method)
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29BD85AA2C9F365000A9DE19 /* resapp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29BD85A92C9F365000A9DE19 /* resapp.storyboard */; };
 		29C098DD2C9B8F37009FCE19 /* resappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C098DC2C9B8F37009FCE19 /* resappApp.swift */; };
 		29C098DF2C9B8F37009FCE19 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C098DE2C9B8F37009FCE19 /* ContentView.swift */; };
 		29C098E12C9B8F3A009FCE19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C098E02C9B8F3A009FCE19 /* Assets.xcassets */; };
@@ -22,9 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29BD85A92C9F365000A9DE19 /* resapp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = resapp.storyboard; sourceTree = "<group>"; };
 		29C098D92C9B8F37009FCE19 /* resapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = resapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29C098DC2C9B8F37009FCE19 /* resappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resappApp.swift; sourceTree = "<group>"; };
-		29C098DE2C9B8F37009FCE19 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		29C098DE2C9B8F37009FCE19 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		29C098E02C9B8F3A009FCE19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29C098E32C9B8F3A009FCE19 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		29C098E52C9B8F3A009FCE19 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -68,9 +70,10 @@
 			isa = PBXGroup;
 			children = (
 				29C098DC2C9B8F37009FCE19 /* resappApp.swift */,
+				29BD85A92C9F365000A9DE19 /* resapp.storyboard */,
 				29C098FD2C9BF963009FCE19 /* JobDetailView.swift */,
-				29C098DE2C9B8F37009FCE19 /* ContentView.swift */,
 				29DD41E32C9D23A4001057A4 /* JobListView.swift */,
+				29C098DE2C9B8F37009FCE19 /* ContentView.swift */,
 				29C0990C2C9C08A6009FCE19 /* JobFormView.swift */,
 				29C099092C9C0886009FCE19 /* AppError.swift */,
 				29C099082C9C0886009FCE19 /* PDFGenerator.swift */,
@@ -153,6 +156,7 @@
 			files = (
 				29C098E42C9B8F3A009FCE19 /* Preview Assets.xcassets in Resources */,
 				29C098E12C9B8F3A009FCE19 /* Assets.xcassets in Resources */,
+				29BD85AA2C9F365000A9DE19 /* resapp.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
